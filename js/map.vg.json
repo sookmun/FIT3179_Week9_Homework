@@ -4,36 +4,35 @@
     "width": 800,
     "height": 600,
     "data": {
-      "url": "https://github.com/sookmun/FIT3179_Week9_Homework/tree/main/js/week9.topojson",
+      "url": "https://raw.githubusercontent.com/sookmun/FIT3179_Week9_Homework/main/js/week9.topojson",
       "format": {
             "type": "topojson",
             "feature": "week9"
           }
     },
     "transform": [{
-        "lookup": "properties.NAME",
+        "lookup": "properties.name",
         "from": {
           "data": {
-            "url": "https://github.com/sookmun/FIT3179_Week9_Homework/tree/main/Data/2020.csv"
+            "url": "https://raw.githubusercontent.com/sookmun/FIT3179_Week9_Homework/main/Data/2020.csv"
           },
-          "key": "Country",
+          "key": "Country name",
           "fields": ["Ladder score"]
         }
       }
     ],
-    "projection": {
-      "type": "equirectangular"
-    },
     "mark": {
       "type": "geoshape"
       },
     "encoding": {
       "color": {
         "field": "Ladder score",
-        "type": "quantitative"
+        "type": "quantitative",
+        "scale": {"type": "log"}
       },
       "tooltip": [
-        {"field": "properties.NAME", "type": "nominal", "title": "Country name"}
+        {"field": "properties.name", "type": "nominal", "title": "Country name"},
+        {"field": "Ladder score", "type": "quantitative"}
       ]
     }
   
