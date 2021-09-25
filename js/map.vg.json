@@ -1,36 +1,41 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "World Hapinness Score",
     "width": 800,
-    "height": 500,
-    "title": "World Happiness Score",
-    "projection": {"type": "equalEarth"},
-    "layer": [
-      {
-        "data": {
-          "url": "https://github.com/sookmun/FIT3179_Week9_Homework/tree/main/js/week9.topojson",
-          "format": {"type": "topojson", "feature": "week9"}
-        },
-        "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"}
-      },
-      {
-        "data": {
-          "url": "https://github.com/sookmun/FIT3179_Week9_Homework/tree/main/Data/2020.csv"
-        },
-        "mark": {"type": "circle", "tooltip": {"content": "data"}},
-        "encoding": {
-          "longitude": {"field": "longitude", "type": "quantitative"},
-          "latitude": {"field": "latitude", "type": "quantitative"},
-          "size": {
-            "field": "mag",
-            "type": "quantitative",
-            "scale": {"domain": [4, 8]}
-          },
-          "color": {
-            "field": "depth",
-            "type": "quantitative",
-            "scale": {"scheme": "blues"}
+    "height": 600,
+    "data": {
+      "url": "https://github.com/sookmun/FIT3179_Week9_Homework/tree/main/js/week9.topojson",
+      "format": {
+            "type": "topojson",
+            "feature": "week9"
           }
+    },
+    "transform": [{
+        "lookup": "properties.NAME",
+        "from": {
+          "data": {
+            "url": "https://github.com/sookmun/FIT3179_Week9_Homework/tree/main/Data/2020.csv"
+          },
+          "key": "Country",
+          "fields": ["Ladder score"]
         }
       }
-    ]
+    ],
+    "projection": {
+      "type": "equirectangular"
+    },
+    "mark": {
+      "type": "geoshape"
+      },
+    "encoding": {
+      "color": {
+        "field": "Ladder score",
+        "type": "quantitative"
+      },
+      "tooltip": [
+        {"field": "properties.NAME", "type": "nominal", "title": "Country name"}
+      ]
+    }
+  
   }
+  
